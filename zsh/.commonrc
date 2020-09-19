@@ -1,0 +1,26 @@
+# ANDROID CONFIG
+export ANDROID_HOME=$HOME/Android/Sdk
+export PATH=$PATH:$ANDROID_HOME/emulator
+export PATH=$PATH:$ANDROID_HOME/tools
+export PATH=$PATH:$ANDROID_HOME/tools/bin
+export PATH=$PATH:$ANDROID_HOME/platform-tools
+
+#FLUTTER
+export PATH=$PATH:$HOME/Apps/flutter/flutter/bin
+
+#vcpkg visual c package manager
+export PATH=$PATH:$HOME/Apps/vcpkg
+
+#add dart
+export PATH=$PATH:$HOME/Apps/flutter/flutter/bin/cache/dart-sdk/bin
+
+#RUST
+export PATH=$PATH:$HOME/.cargo/bin
+
+#NVM
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+#GIRLAB RUNNER
+# export GITLAB_RUNNER_DISABLE_SKEL=true; sudo -E apt-get install gitlab-runner

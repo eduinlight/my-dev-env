@@ -1,0 +1,10 @@
+pane	0	1	:..10/airmodules	0	:-	1	:/home/light/PROYECTS/FREELANCE/FRONT10/airmodules	1	zsh	:
+pane	0	2	:yarn	1	:*	1	:/home/light/PROYECTS/FREELANCE/FRONT10/airmodules	1	node	:node /home/light/.nvm/versions/node/v12.16.2/bin/yarn storybook
+pane	0	2	:yarn	1	:*	2	:/home/light/PROYECTS/FREELANCE/FRONT10/airmodules	0	zsh	:
+pane	0	3	:htop	0	:	1	:/home/light/PROYECTS/FREELANCE/FRONT10/airmodules	1	zsh	:
+pane	0	3	:htop	0	:	2	:/home/light/PROYECTS/FREELANCE/FRONT10/airmodules	0	htop	:htop
+pane	0	3	:htop	0	:	3	:/home/light/PROYECTS/FREELANCE/FRONT10/airmodules	0	zsh	:
+window	0	1	0	:-	b03d,193x50,0,0,0
+window	0	2	1	:*	0c88,193x50,0,0{96x50,0,0,1,96x50,97,0,2}
+window	0	3	0	:	11e6,193x50,0,0{96x50,0,0,3,96x50,97,0[96x25,97,0,4,96x24,97,26,5]}
+state	0	

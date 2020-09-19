@@ -1,0 +1,174 @@
+"PLUGINGS"
+call plug#begin('~/.vim/plugged')
+Plug 'preservim/nerdtree'
+Plug 'frazrepo/vim-rainbow'
+Plug 'josa42/vim-lightline-coc'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'jiangmiao/auto-pairs'
+Plug 'tpope/vim-commentary'
+Plug 'itchyny/lightline.vim'
+Plug 'mbbill/undotree'
+Plug 'vim-utils/vim-man'
+Plug 'tpope/vim-fugitive'
+Plug 'jremmen/vim-ripgrep'
+Plug 'tpope/vim-fugitive'
+Plug 'peitalin/vim-jsx-typescript'
+Plug 'itchyny/vim-gitbranch'
+" THEMES
+Plug 'morhetz/gruvbox'
+Plug 'flazz/vim-colorschemes'
+Plug 'tomasiser/vim-code-dark'
+call plug#end()
+
+" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
+" delays and poor user experience.
+set updatetime=50
+
+"THEME"
+colorscheme gruvbox
+set background=dark
+let g:gruvbox_contrast_dark='hard'
+" colorscheme codedark
+let g:airline_theme = 'codedark'
+
+"BASIC SETTINGS"
+syntax on
+
+set noerrorbells
+set tabstop=2 softtabstop=2
+set shiftwidth=2
+set expandtab
+set smartindent
+set number relativenumber
+" set nu
+set nowrap
+set smartcase
+set noswapfile
+set nobackup
+set undodir=~/.vim/undodir
+set undofile
+set incsearch
+set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
+set runtimepath^=~/.vim/bundle/ctrlp.vim
+set colorcolumn=100
+set cursorline
+set wildmenu
+set showcmd
+set lazyredraw
+set showmatch
+set hlsearch
+set bs=2
+highlight ColorColumn ctermbg=0 guibg=lightgrey
+
+"KEY BINDINGS"
+let mapleader=" "
+nnoremap <leader>h :wincmd h<CR>
+nnoremap <leader>j :wincmd j<CR>
+nnoremap <leader>k :wincmd k<CR>
+nnoremap <leader>l :wincmd l<CR>
+nnoremap <silent> <leader>+ :vertical resize +5<CR>
+nnoremap <silent> <leader>- :vertical resize -5<CR>
+nnoremap <leader>u :UndotreeShow<CR>
+nnoremap <leader>q :q<CR>
+nnoremap <leader>p :CtrlP<CR>
+nnoremap <leader>w :w<CR>
+nnoremap <A-r> :t .<CR>
+nnoremap <A-j> :m .+1<CR>==
+nnoremap <A-k> :m .-2<CR>==
+map Q :bdelete<CR>
+map <A-b> :NERDTreeFind<CR>
+nnoremap ( :bn<CR>
+nnoremap ) :bp<CR>
+nmap <leader>ee :CocAction<CR>
+nmap <leader>gd <Plug>(coc-definition)
+nmap <leader>gi <Plug>(coc-implementation)
+nmap <leader>gt <Plug>(coc-type-definition)
+nmap <leader>gr <Plug>(coc-references)
+nmap <F2> <Plug>(coc-rename)
+nnoremap <A-f> <:CocCommand eslint.executeAutofix<CR>
+nnoremap <A-c> :Commentary<CR>
+nnoremap <Leader>ss :mks! ~/.vim-sessions/*.vim<C-D><BS><BS><BS><BS><BS>
+nnoremap <Leader>sr :so ~/.vim-sessions/*.vim<C-D><BS><BS><BS><BS><BS>
+imap <C-l> <Plug>(coc-snippets-expand-jump)
+nnoremap <F10> :so ~/.vimrc<CR>
+" Copy and paste from/to registers
+noremap <Leader>y "*y
+noremap <Leader>p "*p
+noremap <Leader>Y "+y
+noremap <Leader>P "+p
+" DELEETE NOT CUT
+nnoremap d "_d
+vnoremap d "_d
+nnoremap dd "_dd
+vnoremap dd "_dd
+
+" GLOBALS"
+let g:sessions_dir = '~/.vim-sessions'
+let g:ctrlp_match_window = 'bottom,order:ttb'
+let g:ctrlp_switch_buffer = 0
+let g:ctrlp_working_path_mode = 0
+let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
+let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+let g:ctrlp_use_caching = 0
+" let g:coc_disable_startup_warning = 1
+
+" Rainbow
+let g:rainbow_active = 1
+
+" Light line
+let g:lightline={}
+let g:lightline.component_expand = {
+  \   'linter_warnings': 'lightline#coc#warnings',
+  \   'linter_errors': 'lightline#coc#errors',
+  \   'linter_ok': 'lightline#coc#ok',
+  \   'status': 'lightline#coc#status',
+  \ }
+" Set color to the components:
+let g:lightline.component_type = {
+  \   'linter_warnings': 'warning',
+  \   'linter_errors': 'error',
+  \   'linter_ok': 'left',
+  \ }
+let g:lightline.active = { 
+      \     'right': [[ 'coc_errors', 'coc_warnings', 'coc_ok' ]],
+      \     'left': [ [ 'mode', 'paste' ],
+      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+      \     }
+let g:lightline.component_function = {
+      \   'gitbranch': 'gitbranch#name',
+      \   'filename': 'LightlineFilename',
+      \ }
+
+function! LightlineFilename()
+  let root = fnamemodify(get(b:, 'git_dir'), ':h')
+  let path = expand('%:p')
+  if path[:len(root)-1] ==# root
+    return path[len(root)+1:]
+  endif
+  return expand('%')
+endfunction
+
+" RG ALLWAYS DETECT THE ROOT PATH"
+if executable('rg')
+  let g:rg_derive_root='true'
+endif
+
+autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescript.tsx 
+" set filetypes as typescript.tsx
+
+" MAPPING ALT KEY CORRECTLY
+let c='a'
+while c <= 'z'
+  exec "set <A-".c.">=\e".c
+  exec "imap \e".c." <A-".c.">"
+  let c = nr2char(1+char2nr(c))
+endw
+set timeout ttimeoutlen=50
+
+" NETRW
+let g:netrw_banner = 0
+
+" NERD TREE
+let NERDTreeHijackNetrw=1
+let NERDTreeQuitOnOpen=1
+

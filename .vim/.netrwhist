@@ -1,0 +1,10 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =8
+let g:netrw_dirhist_8='/home/light/.3T'
+let g:netrw_dirhist_7='/home/light'
+let g:netrw_dirhist_6='/home/light/PROYECTS/FREELANCE/FRONT10/airmodules/src/components/containers/InteractiveMapContainer'
+let g:netrw_dirhist_5='/home/light/PROYECTS/FREELANCE/FRONT10/airmodules/src/components/containers/InteractiveMapContainer/hooks'
+let g:netrw_dirhist_4='/home/light/PROYECTS/FREELANCE/FRONT10/airmodules/src/components/containers/AirBnBCarouselContainer'
+let g:netrw_dirhist_3='/home/light/PROYECTS/FREELANCE/FRONT10/airmodules/src/components/containers'
+let g:netrw_dirhist_2='/home/light/PROYECTS/FREELANCE/FRONT10/airmodules/src/components/containers/InteractiveMapContainer'
+let g:netrw_dirhist_1='/home/light/PROYECTS/FREELANCE/FRONT10/airmodules/src/components/containers/InteractiveMapContainer/hooks'

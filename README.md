@@ -1,4 +1,4 @@
 ## This is my dev enviroment with:
 - zsh: 
 - tmux: 
-- neovim:
+- [Neovim](https://neovim.io)

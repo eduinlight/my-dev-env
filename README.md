@@ -1,1 +1,4 @@
-#This is my vim and nvim config
+## This is my dev enviroment with:
+- zsh: 
+- tmux: 
+- neovim:

@@ -9,4 +9,5 @@ cp -R ~/.tmux ./tmux/
 cp ~/.vimrc ./nvim/
 cp -R ~/.vim ./nvim/
 cp -R ~/.config/nvim ./nvim/.config/
+rm -rf ./nvim/.vim/undodir
 

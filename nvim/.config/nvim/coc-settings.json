@@ -1,9 +1,6 @@
 {
   "languageserver": {
-    "clangd": {
-      "rootPatterns": ["compile_flags.txt", "compile_commands.json"],
-      "command": "clangd",
-      "filetypes": ["c", "cc", "cpp", "c++", "objc", "objcpp"]
-    }
-  }
+  },
+  "tsserver.enableJavascript": true,
+  "tsserver.implicitProjectConfig.experimentalDecorators": true
 }

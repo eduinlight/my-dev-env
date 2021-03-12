@@ -1,5 +1,7 @@
 "PLUGINGS"
 call plug#begin('~/.vim/plugged')
+Plug 'pboettch/vim-cmake-syntax'
+Plug 'vhdirk/vim-cmake'
 Plug 'preservim/nerdtree'
 Plug 'frazrepo/vim-rainbow'
 Plug 'josa42/vim-lightline-coc'
@@ -15,7 +17,11 @@ Plug 'vim-utils/vim-man'
 Plug 'tpope/vim-fugitive'
 Plug 'jremmen/vim-ripgrep'
 Plug 'tpope/vim-fugitive'
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+Plug 'wsdjeg/vim-todo'
+" SYNTAX
 Plug 'leafgarland/typescript-vim'
+Plug 'pangloss/vim-javascript'
 Plug 'itchyny/vim-gitbranch'
 Plug 'rust-lang/rust.vim'
 Plug 'alvan/vim-closetag'
@@ -30,6 +36,7 @@ Plug 'morhetz/gruvbox'
 Plug 'flazz/vim-colorschemes'
 Plug 'tomasiser/vim-code-dark'
 Plug 'Yggdroot/indentLine'
+Plug 'wavded/vim-stylus'
 call plug#end()
 
 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
@@ -83,15 +90,15 @@ nnoremap <leader>u :UndotreeShow<CR>
 nnoremap <leader>q :q<CR>
 nnoremap <leader>p :CtrlP<CR>
 nnoremap <leader>w :w<CR>
-nnoremap <A-r> :t .<CR>
-nnoremap <A-j> :m .+1<CR>==
-nnoremap <A-k> :m .-2<CR>==
+nnoremap ® :t .<CR>
+nnoremap ∆ :m .+1<CR>==
+nnoremap ˚ :m .-2<CR>==
 map Q :bdelete<CR>
-map <A-b> :NERDTreeFind<CR>
+map ∫ :NERDTreeFind<CR>
 nnoremap ( :bn<CR>
 nnoremap ) :bp<CR>
 nmap <F3> :CocSearch 
-nmap <leader>ee :CocAction<CR>
+nmap <leader>ee <Plug>(coc-codeaction-selected)
 nmap <leader>gd <Plug>(coc-definition)
 nmap <leader>gi <Plug>(coc-implementation)
 nmap <leader>gt <Plug>(coc-type-definition)
@@ -101,11 +108,12 @@ nmap <leader>gc :GCheckout<CR>
 nmap <leader>cc :Gcommit<CR>
 nmap <leader>pp :Gpush<CR>
 nmap <F2> <Plug>(coc-rename)
-nnoremap <A-f> <:CocCommand eslint.executeAutofix<CR>
+nnoremap ƒ <:CocCommand eslint.executeAutofix<CR>
 noremap <leader>ff :Autoformat<CR>
-imap <C-l> <Plug>(coc-snippets-expand-jump)
+inoremap <expr> <C-l> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 nnoremap <C-p> :Files<CR>
-nnoremap <A-c> :Commentary<CR>
+nnoremap ç :Commentary<CR>
+vnoremap ç :Commentary<CR>
 nnoremap <Leader>ss :mks! ~/.vim-sessions/*.vim<C-D><BS><BS><BS><BS><BS>
 nnoremap <Leader>sr :so ~/.vim-sessions/*.vim<C-D><BS><BS><BS><BS><BS>
 nnoremap <F10> :so ~/.vimrc<CR>
@@ -170,15 +178,15 @@ autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescript.tsx
 " set filetypes as typescript.tsx
 
 " MAPPING ALT KEY CORRECTLY
-if !has('nvim')
-  let c='a'
-  while c <= 'z'
-    exec "set <A-".c.">=\e".c
-    exec "imap \e".c." <A-".c.">"
-    let c = nr2char(1+char2nr(c))
-  endw
-endif
-set timeout ttimeoutlen=50
+" if !has('nvim')
+"  let c='a'
+   "while c <= 'z'
+"    exec "set <A-".c.">=\e".c
+   " exec "imap \e".c." <A-".c.">"
+   " let c = nr2char(1+char2nr(c))
+ " endw
+"endif
+"set timeout ttimeoutlen=50
 
 " NETRW
 let g:netrw_banner = 0
@@ -188,14 +196,14 @@ let NERDTreeHijackNetrw=1
 let NERDTreeQuitOnOpen=1
 
 " CLOSE TAGS
-let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.jsx,*.tsx'
-let g:closetag_xhtml_filenames = '*.xhtml,*.jsx,*.tsx'
-let g:closetag_filetypes = 'html,xhtml,phtml,jsx,tsx'
-let g:closetag_xhtml_filetypes = 'xhtml,jsx,tsx'
+let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.js,*.tsx'
+let g:closetag_xhtml_filenames = '*.xhtml,*.js,*.tsx'
+let g:closetag_filetypes = 'html,xhtml,phtml,js,tsx'
+let g:closetag_xhtml_filetypes = 'xhtml,js,tsx'
 let g:closetag_emptyTags_caseSensitive = 1
 let g:closetag_regions = {
     \ 'typescript.tsx': 'jsxRegion,tsxRegion',
-    \ 'javascript.jsx': 'jsxRegion',
+    \ 'javascript.js': 'jsxRegion',
     \ }
 let g:closetag_shortcut = '>'
 let g:closetag_close_shortcut = '<leader>>'
@@ -207,14 +215,25 @@ let  g:rg_binary = 'rgrep'
 let g:autoformat_autoindent = 0
 let g:autoformat_retab = 0
 let g:autoformat_remove_trailing_spaces = 0
+" C and C++
+let g:formatdef_my_custom_c = '"clang-format --style=LLVM"'
+let g:formatters_c = ['my_custom_c']
+let g:formatdef_my_custom_cxx = '"clang-format --style=LLVM"'
+let g:formatters_cxx = ['my_custom_c']
 
 " fzf
 " See `man fzf-tmux` for available options
 let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
 let $FZF_DEFAULT_OPTS='--reverse'
-let $FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -l -g ""'
+let $FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
 
 " IDENT GUIDES
 let g:indentLine_char = '¦'
 
 let g:vim_jsx_pretty_colorful_config = 1
+
+" Triger `autoread` when files changes on disk
+" https://unix.stackexchange.com/questions/149209/refresh-changed-content-of-file-opened-in-vim/383044#383044
+" https://vi.stackexchange.com/questions/13692/prevent-focusgained-autocmd-running-in-command-line-editing-mode
+autocmd FocusGained,BufEnter,CursorHold,CursorHoldI *
+  \ if mode() !~ '\v(c|r.?|!|t)' && getcmdwintype() == '' | checktime | endif

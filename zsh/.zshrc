@@ -2,7 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/home/light/.oh-my-zsh"
+export ZSH="/Users/eduingarciacordero/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -33,7 +33,7 @@ ZSH_THEME="agnoster"
 # export UPDATE_ZSH_DAYS=13
 
 # Uncomment the following line if pasting URLs and other text is messed up.
-# DISABLE_MAGIC_FUNCTIONS=true
+# DISABLE_MAGIC_FUNCTIONS="true"
 
 # Uncomment the following line to disable colors in ls.
 # DISABLE_LS_COLORS="true"
@@ -80,11 +80,11 @@ source $ZSH/oh-my-zsh.sh
 # export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
+if [[ -n $SSH_CONNECTION ]]; then
+   export EDITOR='nvim'
+else
+  export EDITOR='nvim'
+fi
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -94,13 +94,8 @@ source $ZSH/oh-my-zsh.sh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
 #
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-DEFAULT_USER=lighlt
-
 # COMMON ENVIROMENT
-source ./.commonrc
+source ~/.commonrc
 
 # vim alias
 alias vi="nvim"
@@ -114,6 +109,21 @@ alias dcub="docker-compose up --build"
 alias dps="docker ps"
 alias dpsa="docker ps -a"
 alias dcstop="docker-compose stop"
+alias oathtool="/Volumes/Data/downloads_save/oathplus/oathplus"
+alias ga_electrum="oathtool --totp -b ZOIHTGKFNCQZOQDY"
+alias ga_pionex="oathtool --totp -b JFT5344O5FLFPUY3"
+alias clappy-api-server="ssh -i \"/Volumes/Data/PROYECTS/FREELANCE/REINIER HOLGUIN/HolaVideo/aws key/clappy-api.pem\" ubuntu@api.clappy-app.com"
+alias hp-server="ssh -i /Volumes/Data/PROYECTS/FREELANCE/YANIER/HolaPlace/server/apiholaplace.pem ubuntu@fravenespcu.com"
+alias hp-runner="ssh -i ~/.ssh/hp_runner root@167.86.73.83"
+alias fly-booking-contabo-server="ssh -i ~/.ssh/contabo_server root@207.244.236.216"
 
-# exec tmux
+# TMUX
 tmux
+export PATH="/usr/local/opt/libiconv/bin:$PATH"
+
+# USING VIM SHORCUTS
+# bindkey -v
+
+# MYSQL CLIENT
+export PATH="/usr/local/opt/mysql-client/bin:$PATH"
+

@@ -101,6 +101,7 @@ source ~/.commonrc
 alias vi="nvim"
 alias vim="nvim"
 alias browserstack="./Apps/browserstack/browserstack --key XGrPkwyypRa7tQF1tPnx"
+alias dcudb="docker-compose -f docker-compose-db.yml up -d"
 alias dcd="docker-compose down"
 alias dcu="docker-compose up"
 alias dcud="docker-compose up -d"
@@ -127,3 +128,12 @@ export PATH="/usr/local/opt/libiconv/bin:$PATH"
 # MYSQL CLIENT
 export PATH="/usr/local/opt/mysql-client/bin:$PATH"
 
+# pyenv
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init -)"
+fi
+
+# heroku autocomplete setup
+HEROKU_AC_ZSH_SETUP_PATH=/Users/eduingarciacordero/Library/Caches/heroku/autocomplete/zsh_setup && test -f $HEROKU_AC_ZSH_SETUP_PATH && source $HEROKU_AC_ZSH_SETUP_PATH;

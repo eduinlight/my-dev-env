@@ -19,6 +19,13 @@ Plug 'jremmen/vim-ripgrep'
 Plug 'tpope/vim-fugitive'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 Plug 'wsdjeg/vim-todo'
+"clojure
+Plug 'venantius/vim-cljfmt'
+Plug 'tpope/vim-fireplace'
+Plug 'clojure-vim/async-clj-omni'
+Plug 'tpope/vim-salve'
+Plug 'markwoodhall/vim-figwheel'
+Plug 'guns/vim-clojure-static'
 " SYNTAX
 Plug 'leafgarland/typescript-vim'
 Plug 'pangloss/vim-javascript'
@@ -30,6 +37,7 @@ Plug 'honza/vim-snippets'
 Plug 'Chiel92/vim-autoformat'
 Plug 'ekalinin/dockerfile.vim'
 Plug 'mattn/emmet-vim'
+Plug 'dhruvasagar/vim-zoom'
 " THEMES
 Plug 'MaxMEllon/vim-jsx-pretty'
 Plug 'morhetz/gruvbox'
@@ -51,9 +59,11 @@ let g:airline_theme = 'codedark'
 
 "BASIC SETTINGS"
 syntax on
+filetype plugin indent on
 
 set noerrorbells
-set tabstop=2 softtabstop=2
+set tabstop=2
+set softtabstop=2
 set shiftwidth=2
 set expandtab
 set smartindent
@@ -89,6 +99,7 @@ nnoremap <silent> <leader>- :vertical resize -5<CR>
 nnoremap <leader>u :UndotreeShow<CR>
 nnoremap <leader>q :q<CR>
 nnoremap <leader>p :CtrlP<CR>
+nnoremap <leader>fc :! lein cljfmt fix %<CR>
 nnoremap <leader>w :w<CR>
 nnoremap ® :t .<CR>
 nnoremap ∆ :m .+1<CR>==
@@ -104,6 +115,7 @@ nmap <leader>gi <Plug>(coc-implementation)
 nmap <leader>gt <Plug>(coc-type-definition)
 nmap <leader>gr <Plug>(coc-references)
 " GIT MAPS
+nmap <F12> :OpenTodo<CR>
 nmap <leader>gc :GCheckout<CR>
 nmap <leader>cc :Gcommit<CR>
 nmap <leader>pp :Gpush<CR>
@@ -237,3 +249,7 @@ let g:vim_jsx_pretty_colorful_config = 1
 " https://vi.stackexchange.com/questions/13692/prevent-focusgained-autocmd-running-in-command-line-editing-mode
 autocmd FocusGained,BufEnter,CursorHold,CursorHoldI *
   \ if mode() !~ '\v(c|r.?|!|t)' && getcmdwintype() == '' | checktime | endif
+
+" Clojure
+let g:coc_global_extensions = ['coc-conjure']
+let g:syntastic_clojure_checkers = ['eastwood']
